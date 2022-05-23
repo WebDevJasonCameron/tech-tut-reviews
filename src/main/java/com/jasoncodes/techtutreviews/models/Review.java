@@ -10,14 +10,15 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+    @Column(length = 255)
     private String title;
-    @Column(name = "review_comments")
+    @Column(name = "review_comments", length = 10_000)
     private String reviewComments;
     @Column
     private int rating;
     @Column
     private String thumb;
+    @Column String url;
 
     // Later... Many to One ... User relation
     // Later... Many to Many ... Cat relation
@@ -26,13 +27,13 @@ public class Review {
     // CON
     public Review() {
     }
-    public Review(String title, String reviewComments, int rating, String thumb) {
+    public Review(String title, String reviewComments, int rating, String thumb, String url) {
         this.title = title;
         this.reviewComments = reviewComments;
         this.rating = rating;
         this.thumb = thumb;
+        this.url = url;
     }
-
 
     // GET
     public long getId() {
@@ -50,6 +51,9 @@ public class Review {
     public String getThumb() {
         return thumb;
     }
+    public String getUrl() {
+        return url;
+    }
 
 
     // SET
@@ -65,6 +69,9 @@ public class Review {
     public void setThumb(String thumb) {
         this.thumb = thumb;
     }
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
 
     // CHECK
@@ -76,6 +83,7 @@ public class Review {
                 ", reviewComments='" + reviewComments + '\'' +
                 ", rating=" + rating +
                 ", thumb='" + thumb + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 

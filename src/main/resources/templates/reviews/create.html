@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/partials/partials.html :: head ('Update Review')"></head>
+<body>
+<div class="container">
+    <!--NAV-->
+    <nav th:replace="/partials/partials.html :: nav-component"></nav>
+
+    <!--HEADER-->
+    <section th:replace="/partials/partials.html :: header-section ('Update Review')"></section>
+
+    <!--MAIN-->
+    <div class="container w-75">
+        <form th:action="@{/review/create}" th:method="post" th:object="${review}">
+            <!--title-->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}">
+            </div>
+            <!--review-comments-->
+            <div class="form-group">
+                <label for="review-comments">Your Review</label>
+                <input type="text" class="form-control" id="review-comments" th:field="*{reviewComments}">
+            </div>
+            <!--ratings-->
+            <div class="form-group">
+                <label for="ratings">Your Review</label>
+                <input type="text" class="form-control" id="ratings" th:field="*{ratings}">
+            </div>
+            <!--url-->
+            <div class="form-group">
+                <label for="url">Your Review</label>
+                <textarea type="url" class="form-control" id="url"        placeholder="https://example.com" th:field="*{url}"></textarea>
+            </div>
+            <!--thumb-->
+            <div class="thumb">
+                <label for="thumb">Your Review</label>
+                <input type="text" class="form-control" id="thumb" th:field="*{thumb}">
+            </div>
+        </form>
+    </div>
+
+    <!--SCRIPTS-->
+    <section th:replace="/partials/partials.html :: script-section"></section>
+</div>
+</body>
+</html>
