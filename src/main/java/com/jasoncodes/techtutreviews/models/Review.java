@@ -19,6 +19,9 @@ public class Review {
     @Column
     private String thumb;
     @Column String url;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Later... Many to One ... User relation
     // Later... Many to Many ... Cat relation
@@ -27,12 +30,13 @@ public class Review {
     // CON
     public Review() {
     }
-    public Review(String title, String reviewComments, int rating, String thumb, String url) {
+    public Review(String title, String reviewComments, int rating, String thumb, String url, User user) {
         this.title = title;
         this.reviewComments = reviewComments;
         this.rating = rating;
         this.thumb = thumb;
         this.url = url;
+        this.user = user;
     }
 
     // GET
@@ -54,6 +58,9 @@ public class Review {
     public String getUrl() {
         return url;
     }
+    public User getUser() {
+        return user;
+    }
 
 
     // SET
@@ -72,7 +79,9 @@ public class Review {
     public void setUrl(String url) {
         this.url = url;
     }
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     // CHECK
     @Override
@@ -84,8 +93,7 @@ public class Review {
                 ", rating=" + rating +
                 ", thumb='" + thumb + '\'' +
                 ", url='" + url + '\'' +
+                ", user=" + user +
                 '}';
     }
-
-
 }  //<--END
