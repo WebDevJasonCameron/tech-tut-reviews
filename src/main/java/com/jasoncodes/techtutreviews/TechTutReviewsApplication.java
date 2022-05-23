@@ -1,4 +1,4 @@
-package com.jasoncodes.techtutreviews.techtutreviews;
+package com.jasoncodes.techtutreviews;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
