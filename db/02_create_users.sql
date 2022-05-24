@@ -8,24 +8,15 @@ TRUNCATE users;
 
 DROP TABLE IF EXISTS users;
 
--- 2. Build table:
-CREATE TABLE users (
-       id              int(10) NOT NULL AUTO_INCREMENT,
-       username        varchar(255) NOT NULL UNIQUE,
-       email           varchar(255) NOT NULL UNIQUE,
-       password        varchar(255) NOT NULL,
-       avatar          varchar(255),
-       PRIMARY KEY (id));
-
 -- 3. Seed Table:
-INSERT INTO users (username, email, password, avatar)
-VALUES ('BobaFett', 'bobaFett@war.com', '1234', '/img/avatars/black-01.png'),
-       ('Anakin', 'ASky@Darkside.com', '1234', '/img/avatars/black-01.png'),
-       ('CadBane', 'Cad@grey.com', '1234', '/img/avatars/LightBlue-01.png'),
-       ('Yoda', 'Yoda@yogurt.com', '1234', '/img/avatars/Brown-01.png'),
-       ('Jabba', 'Jabba@crime.com', '1234', '/img/avatars/Brown-01.png'),
-       ('Leia', 'Leia@fightCrime.com', '1234', '/img/avatars/Orange-01.png'),
-       ('Luke', 'Luke@sucks.com', '1234', '/img/avatars/Pink-01.png')
+INSERT INTO users (email, password)
+VALUES ('bobaFett@war.com', '1234'),
+       ('ASky@Darkside.com', '1234'),
+       ('Cad@grey.com', '1234'),
+       ('Yoda@yogurt.com', '1234'),
+       ('Jabba@crime.com', '1234' ),
+       ('Leia@fightCrime.com', '1234'),
+       ('Luke@sucks.com', '1234')
 
 ;
 

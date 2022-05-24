@@ -23,7 +23,6 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Later... Many to One ... User relation
     // Later... Many to Many ... Cat relation
 
 

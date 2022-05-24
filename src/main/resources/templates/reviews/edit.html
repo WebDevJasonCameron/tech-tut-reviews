@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/partials/partials.html :: head ('Update Review')"></head>
+<head th:replace="/partials/partials.html :: head ('Edit Review')"></head>
 <body>
 <div class="container">
     <!--NAV-->
     <nav th:replace="/partials/partials.html :: nav-component"></nav>
 
     <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header-section ('Update Review')"></section>
+    <section th:replace="/partials/partials.html :: header-section ('Edit Review')"></section>
 
     <!--MAIN-->
     <div class="container w-75">
-        <form th:action="@{/reviews/create}" th:method="post" th:object="${review}">
+        <form th:action="@{/reviews/update}" th:method="post" th:object="${review}">
             <!--title-->
             <div class="form-group">
                 <label for="title">Title</label>
@@ -37,12 +37,19 @@
                 <label for="thumb">Thumb</label>
                 <input type="text" class="form-control" id="thumb" th:field="*{thumb}">
             </div>
+            <!--id-->
+            <input type="hidden" name="review-id" th:value="*{id}">
+            <input type="hidden" name="user-id" th:value="*{user.id}">
             <!--submit-->
             <div>
                 <button class="btn btn-primary w-100 mt-4">Submit</button>
             </div>
         </form>
     </div>
+
+
+
+
 
     <!--SCRIPTS-->
     <section th:replace="/partials/partials.html :: script-section"></section>
