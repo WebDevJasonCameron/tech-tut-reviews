@@ -5,6 +5,7 @@ import com.jasoncodes.techtutreviews.models.User;
 import com.jasoncodes.techtutreviews.repositories.ReviewRepository;
 import com.jasoncodes.techtutreviews.repositories.UserRepository;
 import com.jasoncodes.techtutreviews.services.EmailService;
+import com.jasoncodes.techtutreviews.services.StringService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,15 @@ public class ReviewController {
     private final  ReviewRepository reviewDao;
     private final UserRepository userDao;
     private final EmailService emailService;
+    private final StringService stringService;
 
 
     // CON
-    public ReviewController(ReviewRepository reviewDao, UserRepository userDao, EmailService emailService) {
+    public ReviewController(ReviewRepository reviewDao, UserRepository userDao, EmailService emailService, StringService stringService) {
         this.reviewDao = reviewDao;
         this.userDao = userDao;
         this.emailService = emailService;
+        this.stringService = stringService;
     }
 
     // METH
@@ -38,7 +41,13 @@ public class ReviewController {
     @GetMapping("/all")
     public String showAllReviews(Model model){
 
+
         List<Review> reviews = reviewDao.findAll();
+        List<User> users = userDao.findAll();
+
+        model.addAttribute("userSize", users.size());
+        model.addAttribute("reviewSize", reviews.size());
+        model.addAttribute("stringService", stringService);
         model.addAttribute("reviews", reviews);
 
         return "/reviews/all";
