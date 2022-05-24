@@ -9,14 +9,14 @@ TRUNCATE users;
 DROP TABLE IF EXISTS users;
 
 -- 3. Seed Table:
-INSERT INTO users (email, password)
-VALUES ('bobaFett@war.com', '1234'),
-       ('ASky@Darkside.com', '1234'),
-       ('Cad@grey.com', '1234'),
-       ('Yoda@yogurt.com', '1234'),
-       ('Jabba@crime.com', '1234' ),
-       ('Leia@fightCrime.com', '1234'),
-       ('Luke@sucks.com', '1234')
+INSERT INTO users (username, email, password)
+VALUES ('boba', 'bobaFett@war.com', '1234'),
+       ('sky',  'ASky@Darkside.com', '1234'),
+       ('cad','Cad@grey.com', '1234'),
+       ('yoda', 'Yoda@yogurt.com', '1234'),
+       ('jabba', 'Jabba@crime.com', '1234' ),
+       ('leia', 'Leia@fightCrime.com', '1234'),
+       ('luke', 'Luke@sucks.com', '1234')
 
 ;
 

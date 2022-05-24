@@ -9,7 +9,7 @@ TRUNCATE reviews;
 DROP TABLE IF EXISTS reviews;
 
 -- 3. Seed Table:
-INSERT INTO reviews(title, review_comments, rating, thumb, url, user_id)
+INSERT INTO reviews(title, review_comments, rating,  url, thumb, user_id)
 VALUES ('Review title 01',
         'Luuke jar solo anakin mothma jade zabrak tusken raider. Antilles organa dantooine gamorrean windu dantooine yavin. Skywalker hutt aayla c-3p0 kessel. Coruscant darth yavin ahsoka windu jade mace amidala. Moff luke mothma darth. Moff kenobi hutt darth mustafar darth. C-3po skywalker jabba r2-d2 wicket ponda. Skywalker ben windu kamino tatooine wampa antilles mandalore palpatine. Moff anakin antilles dooku lars. Sith antilles maul ewok wookiee coruscant hutt. Darth binks lobot moff antilles mace.
         Coruscant jade dagobah windu mandalorians. Mon leia jabba utapau. Droid jade luuke k-3po darth c-3p0 endor jinn. Antilles kessel jinn skywalker. Skywalker qui-gon chewbacca dagobah dagobah. Ahsoka wookiee solo darth calrissian moff calrissian moff. Palpatine sith kashyyyk fett darth. Bothan dooku darth darth grievous. Organa mara coruscant jango dagobah kashyyyk. Organa maul sebulba',

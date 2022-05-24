@@ -12,6 +12,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
+    private String username;
+    @Column
     private String email;
     @Column
     private String password;
@@ -21,12 +23,20 @@ public class User {
     // CON
     public User() {
     }
-    public User(String email, String password, List<Review> reviews) {
+    public User(String username, String email, String password, List<Review> reviews) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.reviews = reviews;
     }
 
+    // COPY -- SECURITY
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
 
     // GET
     public long getId() {
@@ -41,7 +51,9 @@ public class User {
     public List<Review> getReviews() {
         return reviews;
     }
-
+    public String getUsername() {
+        return username;
+    }
 
     // SET
     public void setEmail(String email) {
@@ -53,16 +65,21 @@ public class User {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     // CHECK
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", reviews=" + reviews +
                 '}';
     }
+
+
 }  //<--END

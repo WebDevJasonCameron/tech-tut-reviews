@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head (title)">
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
@@ -33,6 +35,12 @@
                     <a class="nav-link" href="http://localhost:8080/reviews/create">Create</a>
                 </li>
             </ul>
+            <form th:action="@{/login}" th:method="post">
+                <button class="btn btn-primary mx-4">Logout</button>
+            </form>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="btn btn-danger mx-4">Logout</button>
+            </form>
         </div>
     </nav>
 

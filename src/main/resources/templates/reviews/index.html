@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/partials/partials.html :: head ('Review Page')"></head>
 <body>
 <div class="container">
@@ -15,7 +16,7 @@
             <a href="/reviews/single">Go to Single Review</a>
         </li>
         <li>
-            <a href="#">See all reviews</a>
+            <a href="/reviews/all">See all reviews</a>
         </li>
     </ul>
 

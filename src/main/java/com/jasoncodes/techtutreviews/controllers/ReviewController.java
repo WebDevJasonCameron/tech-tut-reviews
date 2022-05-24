@@ -4,6 +4,7 @@ import com.jasoncodes.techtutreviews.models.Review;
 import com.jasoncodes.techtutreviews.models.User;
 import com.jasoncodes.techtutreviews.repositories.ReviewRepository;
 import com.jasoncodes.techtutreviews.repositories.UserRepository;
+import com.jasoncodes.techtutreviews.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,16 @@ import java.util.Optional;
 public class ReviewController {
 
     // ATT
-    ReviewRepository reviewDao;
-    UserRepository userDao;
+    private final  ReviewRepository reviewDao;
+    private final UserRepository userDao;
+    private final EmailService emailService;
+
 
     // CON
-    public ReviewController(ReviewRepository reviewDao, UserRepository userDao) {
+    public ReviewController(ReviewRepository reviewDao, UserRepository userDao, EmailService emailService) {
         this.reviewDao = reviewDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     // METH
@@ -31,16 +35,25 @@ public class ReviewController {
         return "/reviews/index";
     }
 
+    @GetMapping("/all")
+    public String showAllReviews(Model model){
+
+        List<Review> reviews = reviewDao.findAll();
+        model.addAttribute("reviews", reviews);
+
+        return "/reviews/all";
+    }
+
     @GetMapping("/single")
     public String showSingleReviewPage(Model model){
+
         List<Review> reviews = reviewDao.findAll();
         Review review = reviews.get(reviews.size() - 1);
-
         model.addAttribute("review", review);
+
 
         return "/reviews/single";
     }
-
 
     @GetMapping("/create")
     public String showReviewCreatePage(Model model){
@@ -51,13 +64,16 @@ public class ReviewController {
     @PostMapping("/create")
     public String createReview(@ModelAttribute Review review, Model model){
 
-        User user = userDao.getById(1L);
+        // Attach User
+        User user = userDao.getById(1L);                            //<-- Change after Session
         review.setUser(user);
 
+        // Email Services
+        emailService.prepareAndSend(review, review.getTitle(), review.getReviewComments());
         reviewDao.save(review);
 
+        // Set review obj for page ingestion
         model.addAttribute("review", review);
-
         return "redirect:/reviews/single";
     }
 
@@ -98,5 +114,7 @@ public class ReviewController {
 
         return "/reviews/index";
     }
+
+
 
 }  //<--END

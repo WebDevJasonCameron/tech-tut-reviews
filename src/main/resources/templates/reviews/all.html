@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/partials/partials.html :: head ('All Reviews')"></head>
+<body>
+<div class="container">
+  <!--NAV-->
+  <nav th:replace="/partials/partials.html :: nav-component"></nav>
+
+  <!--HEADER-->
+  <section th:replace="/partials/partials.html :: header-section ('All Reviews')"></section>
+
+  <!--MAIN-->
+  <section id="reviews">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="card-header">
+            <h4>Latest Reviews</h4>
+          </div>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>Thumb</th>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="review : ${reviews}" >
+                <td th:text="${review.thumb}">Review Title</td>
+                <td th:text="${review.title}">Review Title</td>
+                <td th:text="${review.rating}">Review Title</td>
+                <td th:text="${review.reviewComments}">Review Title</td>
+                <td><a class="btn btn-primary" th:href="${review.url}">Link</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--SCRIPTS-->
+  <section th:replace="/partials/partials.html :: script-section"></section>
+</div>
+</body>
+</html>
