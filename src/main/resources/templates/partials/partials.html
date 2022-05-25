@@ -16,48 +16,60 @@
 </head>
 <body>
 
-
     <!--NAV-->
     <nav th:fragment="nav-component" class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">TTR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarCollapse">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/">Home</a>
-                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8080/reviews">Review</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="http://localhost:8080/reviews/create">Create</a>
                 </li>
+                <div sec:authorize="isAuthenticated()">
+                    <li class="nav-item dropdown mr-3">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <i class="fas fa-user"></i> Welcome ${sessionScope.user.username}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="/profile" class="dropdown-item">
+                                <i class="fas fa-user-circle"></i> Profile
+                            </a>
+                            <a href="/reviews/create" class="dropdown-item">
+                                <i class="fa-solid fa-list"></i> Add Review
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </div>
+                    </li>
+                </div>
+                <li>
+                    <div  sec:authorize="!isAuthenticated()">
+                        <form th:action="@{/login}" th:method="post">
+                            <button class="btn btn-primary mx-4">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                Login
+                            </button>
+                        </form>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" th:method="post">
+                            <button class="btn btn-danger mx-4">Logout</button>
+                        </form>
+                    </div>
+                </li>
             </ul>
-            <div  sec:authorize="!isAuthenticated()">
-                <form th:action="@{/login}" th:method="post">
-                    <button class="btn btn-primary mx-4">Login</button>
-                </form>
-            </div>
-            <div sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" th:method="post">
-                    <button class="btn btn-danger mx-4">Logout</button>
-                </form>
-            </div>
         </div>
     </nav>
 
     <!--HEADER-->
     <section th:fragment="header-section (headerName)">
         <h1 th:text="${headerName}"></h1>
-        <div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-
-            User ID: <span th:text="${#authentication.principal.id}"/>
-            Username: <span th:text="${#authentication.principal.username}"/>
-            Email: <span th:text="${#authentication.principal.email}"/>
-        </div>
     </section>
 
 

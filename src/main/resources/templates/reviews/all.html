@@ -41,7 +41,7 @@
                 <td><a class="btn btn-primary" th:href="${review.url}">Link</a></td>
                 <td>
                   <form th:action="@{/reviews/single}" th:method="post">
-                    <input type="hidden" th:value="${review.id}">
+                    <input type="hidden" name="review-id" th:value="${review.id}">
                     <button class="btn btn-success">Read...</button>
                   </form>
                 </td>

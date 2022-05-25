@@ -6,19 +6,19 @@ import com.jasoncodes.techtutreviews.repositories.ReviewRepository;
 import com.jasoncodes.techtutreviews.repositories.UserRepository;
 import com.jasoncodes.techtutreviews.services.EmailService;
 import com.jasoncodes.techtutreviews.services.StringService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/reviews")
 public class ReviewController {
 
     // ATT
-    private final  ReviewRepository reviewDao;
+    private final ReviewRepository reviewDao;
     private final UserRepository userDao;
     private final EmailService emailService;
     private final StringService stringService;
@@ -53,13 +53,13 @@ public class ReviewController {
         return "/reviews/all";
     }
 
-    @GetMapping("/single")
-    public String showSingleReviewPage(Model model){
+    @PostMapping("/single")
+    public String showSingleReviewPage(@RequestParam("review-id") long id,
+                                       Model model){
 
-        List<Review> reviews = reviewDao.findAll();
-        Review review = reviews.get(reviews.size() - 1);
-        model.addAttribute("review", review);
-
+        System.out.println("id = " + id);
+        
+        model.addAttribute("review", reviewDao.getById(id));
 
         return "/reviews/single";
     }
@@ -73,17 +73,20 @@ public class ReviewController {
     @PostMapping("/create")
     public String createReview(@ModelAttribute Review review, Model model){
 
-        // Attach User
-        User user = userDao.getById(1L);                            //<-- Change after Session
+        // User session
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         review.setUser(user);
 
         // Email Services
         emailService.prepareAndSend(review, review.getTitle(), review.getReviewComments());
         reviewDao.save(review);
+        Long id = review.getId();
 
         // Set review obj for page ingestion
-        model.addAttribute("review", review);
-        return "redirect:/reviews/single";
+        model.addAttribute("review-id", id);
+//        model.addAttribute("review", review);
+        return "redirect:/reviews/all";
     }
 
     @PostMapping("/delete")
