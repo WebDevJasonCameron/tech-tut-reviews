@@ -18,22 +18,16 @@
 
     <!--NAV-->
     <nav th:fragment="nav-component" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TTR</a>
+        <a class="navbar-brand" href="/reviews">TTR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarCollapse">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/reviews">Review</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://localhost:8080/reviews/create">Create</a>
-                </li>
                 <div sec:authorize="isAuthenticated()">
                     <li class="nav-item dropdown mr-3">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-user"></i> Welcome ${sessionScope.user.username}
+                            <i class="fas fa-user"></i> Welcome <span th:text="${#authentication.principal.username}">Name</span>
                         </a>
                         <div class="dropdown-menu">
                             <a href="/profile" class="dropdown-item">
