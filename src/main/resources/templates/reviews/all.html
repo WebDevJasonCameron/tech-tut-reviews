@@ -9,15 +9,12 @@
 
 <div class="container">
 
-  <!--HEADER-->
-  <section th:replace="/partials/partials.html :: header-section ('All Reviews')"></section>
-
   <!--MAIN-->
   <section id="reviews">
       <div class="row">
         <!--REVIEW LIST-->
         <div class="col-md-9">
-          <div class="card-header">
+          <div class="mt-5 mb-3">
             <h4>Latest Reviews</h4>
           </div>
           <table class="table table-striped">
@@ -38,7 +35,7 @@
                 </td>
                 <td th:text="${review.title}">Review Title</td>
                 <td th:text="${review.rating}">Review Title</td>
-                <td th:text="${stringService.reduceLength(review.reviewComments, 280)}">Review Title</td>
+                <td th:text="${stringService.reduceLength(review.reviewComments, 200)}">Review Title</td>
                 <td><a class="btn btn-primary" th:href="${review.url}">Link</a></td>
                 <td>
                   <form th:action="@{/reviews/single}" th:method="post">
@@ -53,7 +50,7 @@
         <!--SIDE NAV-->
         <div class="col-md-3">
             <!--CARD 01-->
-            <div class="card text-center bg-primary text-white mb-3">
+            <div class="card text-center bg-primary text-white mb-3 mt-5">
               <div class="card-body">
                 <h3>Reviews</h3>
                 <h4 class="display-4">

@@ -11,22 +11,31 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+    @Column(name = "username")
     private String username;
-    @Column
+    @Column(name = "email")
     private String email;
-    @Column
+    @Column(name = "password")
     private String password;
+    @Column(name = "avatar")
+    private String avatar;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private List<Review> reviews;
+
 
     // CON
     public User() {
     }
-    public User(String username, String email, String password, List<Review> reviews) {
+    public User(long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+    public User(String username, String email, String password, String avatar, List<Review> reviews) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.avatar = avatar;
         this.reviews = reviews;
     }
 
@@ -54,8 +63,14 @@ public class User {
     public String getUsername() {
         return username;
     }
+    public String getAvatar() {
+        return avatar;
+    }
 
     // SET
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
@@ -68,6 +83,9 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     // CHECK
     @Override
@@ -77,6 +95,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
                 ", reviews=" + reviews +
                 '}';
     }
