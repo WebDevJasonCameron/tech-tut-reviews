@@ -5,24 +5,39 @@
   <!--NAV-->
   <nav th:replace="/partials/partials.html :: nav-component"></nav>
 
-<div class="container">
-
-  <!--HEADER-->
-  <section th:replace="/partials/partials.html :: header-section ('sign-up')"></section>
+<div class="container w-75 d-flex justify-content-center">
 
   <!--MAIN-->
-  <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-    <label for="username">Username</label>
-    <input id="username" th:field="*{username}" />
-
-    <label for="email">Email</label>
-    <input id="email" th:field="*{email}" />
-
-    <label for="password">Password</label>
-    <input id="password" type="password" th:field="*{password}" />
-
-    <input value="Sign me up!" type="submit" />
+  <div class="card mt-5 w-75">
+    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+      <div class="card-header">
+        <h4 class="mt-2">
+          Sign Up
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="username" class="form-label my-3">Username</label>
+          <input id="username" class="form-control" th:field="*{username}" />
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label my-3">Email</label>
+          <input id="email" class="form-control" th:field="*{email}" />
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label my-3">Password</label>
+          <input id="password" class="form-control" type="password" th:field="*{password}" />
+        </div>
+        <div class="form-group">
+          <label for="password-check" class="form-label my-3">Password Check</label>
+          <input id="password-check" class="form-control" type="password"/>
+        </div>
+      </div>
+      <div class="card-footer">
+        <input value="Sign me up!" type="submit" class="btn btn-primary" />
+      </div>
   </form>
+  </div>
 
   <!--SCRIPTS-->
   <section th:replace="/partials/partials.html :: script-section"></section>
