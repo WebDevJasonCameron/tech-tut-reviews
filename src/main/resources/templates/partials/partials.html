@@ -18,46 +18,48 @@
 
     <!--NAV-->
     <nav th:fragment="nav-component" class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/reviews">TTR</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarCollapse">
-            <ul class="navbar-nav">
-                <div sec:authorize="isAuthenticated()">
-                    <li class="nav-item dropdown mr-3">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-user"></i> Welcome <span th:text="${#authentication.principal.username}">Name</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="/profile" class="dropdown-item">
-                                <i class="fas fa-user-circle"></i> Profile
+        <div class="container w-75">
+            <a class="navbar-brand" href="/reviews">TTR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <div sec:authorize="isAuthenticated()">
+                        <li class="nav-item dropdown mr-3">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="fas fa-user"></i> Welcome <span th:text="${#authentication.principal.username}">Name</span>
                             </a>
-                            <a href="/reviews/create" class="dropdown-item">
-                                <i class="fa-solid fa-list"></i> Add Review
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
+                            <div class="dropdown-menu">
+                                <a href="/profile" class="dropdown-item">
+                                    <i class="fas fa-user-circle"></i> Profile
+                                </a>
+                                <a href="/reviews/create" class="dropdown-item">
+                                    <i class="fa-solid fa-list"></i> Add Review
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fas fa-cog"></i> Settings
+                                </a>
+                            </div>
+                        </li>
+                    </div>
+                    <li>
+                        <div  sec:authorize="!isAuthenticated()">
+                            <form th:action="@{/login}" th:method="post">
+                                <button class="btn btn-primary mx-4">
+                                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                    Login
+                                </button>
+                            </form>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <form th:action="@{/logout}" th:method="post">
+                                <button class="btn btn-danger mx-4">Logout</button>
+                            </form>
                         </div>
                     </li>
-                </div>
-                <li>
-                    <div  sec:authorize="!isAuthenticated()">
-                        <form th:action="@{/login}" th:method="post">
-                            <button class="btn btn-primary mx-4">
-                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                Login
-                            </button>
-                        </form>
-                    </div>
-                    <div sec:authorize="isAuthenticated()">
-                        <form th:action="@{/logout}" th:method="post">
-                            <button class="btn btn-danger mx-4">Logout</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
 
