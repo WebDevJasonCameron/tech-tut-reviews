@@ -9,7 +9,7 @@
 
   <!--MAIN-->
   <div class="card mt-5 w-75">
-    <form th:action="@{/user/sign-up}" method="POST" th:object="${user}">
+    <form th:action="@{/user/sign-up}" method="POST" th:object="${user}" onsubmit="submitForm(e)">
       <div class="card-header">
         <h4 class="mt-2">
           Sign Up
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <input value="Sign me up!" type="submit" class="btn btn-primary" />
+        <input value="Sign me up!" type="submit" class="btn btn-primary w-100" />
       </div>
   </form>
   </div>
@@ -57,6 +57,7 @@
   <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
   <section th:replace="/partials/partials.html :: script-section"></section>
   <script th:src="@{/js/filestack.js}"></script>
+  <script th:src="@{/js/password-check.js}"></script>
 
 </div>
 </body>

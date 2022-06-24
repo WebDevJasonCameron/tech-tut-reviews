@@ -21,11 +21,12 @@ While I still believe that this type of web application would be amazing if it a
 
 - [ ] Allow users to see other user's profiles without letting them edit or delete the user's reviews
 - [ ] Get the rating to show between zero and five starts
-- [ ] Let the user edit their profile 
+- [X] Let the user edit their profile 
 - [X] let the user upload their own profile picture
 - [ ] Application shows list of users
 - [ ] The application has a very nice splash page when someone new visits the site
 - [ ] Review pages show the creator's information such as name, avatar, and how many reviews they created
+- [X] Password check when creating a user (or edit)
 
 ### Here is why I needed that Focus List
 So, you might notice there is A LOT of things I didn't mention I would add to this social-media like application.  There are three reasons for this.  1) I need to wrap this application up quickly since we graduate soon and these applications may be viewed by a future employer. 2) I have another application I wanted finish right after this (Pizza Application). 3) It's time to move on to other highly demanded subjects such as REACT, which I will be starting after the Pizza App.  Despite this, here are some wish list items that I would like to see eventually:

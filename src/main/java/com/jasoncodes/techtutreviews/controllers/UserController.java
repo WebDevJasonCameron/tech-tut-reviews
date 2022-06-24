@@ -7,10 +7,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("user")
@@ -61,6 +65,48 @@ public class UserController {
         provideUserModel(model);
 
         return "/users/edit";
+    }
+
+    @PostMapping("/edit")
+    public String updateEditUserProfile(@Valid User user,
+                                        BindingResult bindingResult,
+                                        Model model){
+
+        // Get Auth User
+        User principle = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authUser = userDao.getById(principle.getId());
+
+        // Set Att
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String avatar = user.getAvatar();
+        String hash = passwordEncoder.encode(user.getPassword());
+
+        // Catch Problems
+        if(bindingResult.hasErrors()){
+            model.addAttribute("user", user);
+            return "/users/edit";
+        }
+
+        // Catch Empty Inputs
+        if(userDao.findByEmail(user.getEmail()) == null || authUser.getEmail().equals(userDao.findByEmail(user.getEmail()).getEmail())){
+            User modUser = userDao.getById(principle.getId());
+            modUser.setUsername(username);
+            modUser.setEmail(email);
+            modUser.setAvatar(avatar);
+            modUser.setPassword(hash);
+            userDao.save(modUser);
+        } else if (user.getEmail().equals(userDao.findByEmail(user.getEmail()).getEmail())){
+            bindingResult.addError(new FieldError("user", "email", "email is already taken"));
+        }
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("user", user);
+            return "/users/edit";
+        }
+
+
+        return "redirect:/user/profile";
     }
 
 
