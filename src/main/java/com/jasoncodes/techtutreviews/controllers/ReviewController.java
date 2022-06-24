@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,14 +42,19 @@ public class ReviewController {
     @GetMapping("/all")
     public String showAllReviews(Model model){
 
-
         List<Review> reviews = reviewDao.findAll();
+        List<Review> reverseReviews = new ArrayList<>();
         List<User> users = userDao.findAll();
+
+        for (int i = reviews.size() -1; i > 0; i--) {
+            reverseReviews.add(reviews.get(i));
+        }
+
 
         model.addAttribute("userSize", users.size());
         model.addAttribute("reviewSize", reviews.size());
         model.addAttribute("stringService", stringService);
-        model.addAttribute("reviews", reviews);
+        model.addAttribute("reviews", reverseReviews);
 
         return "/reviews/all";
     }
