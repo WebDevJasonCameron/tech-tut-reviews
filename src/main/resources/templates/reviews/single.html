@@ -8,37 +8,76 @@
 
 <div class="container">
 
-    <!--HEADER-->
-    <section th:replace="/partials/partials.html :: header-section ('Single Review')"></section>
+    <!--ACTIONS-->
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/reviews/all" class="btn btn-secondary w-100">
+                        <i class="fas fa-arrow-left"></i>&nbsp;&nbsp; Back To Reviews
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!--MAIN-->
     <div class="container w-75">
-        <div class="card">
-            <div class="card-img text-center">
-                <img th:src="${review.thumb}" alt="logo of the tutorial place" style="width: 50%">
-            </div>
-        </div>
-        <div class="body">
-            <div class="card-title h3" th:text="${review.title}">
-                Title of Review
-            </div>
-            <div th:text="${review.reviewComments}">Comments here</div>
-        </div>
-        <div class="footer">
-            <div><span th:text="${#authentication.principal.id}"></span></div>
-            <div><span th:text="${review.user.id}"></span></div>
-            <div th:if="${#authentication.principal.id eq review.user.id}">
-                <form th:action="@{/reviews/edit}" th:method="post">
-                    <input type="hidden" name="review-id" th:value="${review.id}">
-                    <button class="btn btn-warning w-100 mt-3">Edit</button>
-                </form>
-                <form th:action="@{/reviews/delete}" th:method="post">
-                    <input type="hidden" name="review-id" th:value="${review.id}">
-                    <button class="btn btn-danger w-100 mt-3">Delete</button>
-                </form>
-            </div>
+        <div class="row">
+            <!--Review (LEFT)-->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-img text-center">
+                        <img th:src="${review.thumb}" alt="logo of the tutorial place" style="width: 50%">
+                    </div>
+                </div>
+                <div class="body">
+                    <div class="card-title h3" th:text="${review.title}">
+                        Title of Review
+                    </div>
+                    <div th:text="${review.reviewComments}">Comments here</div>
+                </div>
+                <div class="footer">
+                    <div><span th:text="${#authentication.principal.id}"></span></div>
+                    <div><span th:text="${review.user.id}"></span></div>
+                    <div th:if="${#authentication.principal.id eq review.user.id}">
+                        <form th:action="@{/reviews/edit}" th:method="post">
+                            <input type="hidden" name="review-id" th:value="${review.id}">
+                            <button class="btn btn-warning w-100 mt-3">Edit</button>
+                        </form>
+                        <form th:action="@{/reviews/delete}" th:method="post">
+                            <input type="hidden" name="review-id" th:value="${review.id}">
+                            <button class="btn btn-danger w-100 mt-3">Delete</button>
+                        </form>
+                    </div>
 
+                </div>
+            </div>
+            <!--Author (RIGHT)-->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><span th:text="${review.user.username}"></span> </h3>
+                    </div>
+                    <div class="body">
+                        <div class="d-flex justify-content-center" style="position: relative">
+                            <div style="height: 250px; width: 250px; border-radius: 50%">
+                                <img th:src="${review.user.avatar eq null } ? '/img/avatars/Pink-01.png' : ${review.user.avatar}" alt="Avatar Picture" class="d-block img-fluid mb-3 p-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-title p-3">
+                        <strong>Email:</strong><br>
+                        <span th:text="${review.user.email}"></span>
+                    </div>
+                    <p class="p-3">
+                        <strong>Bio: </strong><br>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores doloremque ea mollitia obcaecati provident qui vel voluptatum. Aspernatur ducimus est facere fugiat inventore, laudantium maxime minus officiis provident quibusdam quidem.
+                    </p>
+                </div>
+            </div>
         </div>
+
 
     </div>
     <!--/*@thymesVar id="title" type="text"*/-->

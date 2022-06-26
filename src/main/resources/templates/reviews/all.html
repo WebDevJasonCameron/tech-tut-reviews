@@ -34,7 +34,7 @@
                   <img th:src="${review.thumb}" alt="alt pix" style="width: 100%">
                 </td>
                 <td th:text="${review.title}">Review Title</td>
-                <td th:text="${review.rating}">Review Title</td>
+                <td th:text="${review.rating}" class="rating">Review Title</td>
                 <td th:text="${stringService.reduceLength(review.reviewComments, 200)}">Review Title</td>
                 <td><a class="btn btn-primary" th:href="${review.url}">Link</a></td>
                 <td>
