@@ -61,9 +61,13 @@
                     </div>
                     <div class="body">
                         <div class="d-flex justify-content-center" style="position: relative">
-                            <div style="height: 250px; width: 250px; border-radius: 50%">
-                                <img th:src="${review.user.avatar eq null } ? '/img/avatars/Pink-01.png' : ${review.user.avatar}" alt="Avatar Picture" class="d-block img-fluid mb-3 p-3">
-                            </div>
+                            <form action="">
+                                <input type="hidden" name="visit-avatar" th:value="${review.user.id}">
+
+                                <div style="height: 250px; width: 250px; border-radius: 50%">
+                                    <img th:src="${review.user.avatar eq null } ? '/img/avatars/Pink-01.png' : ${review.user.avatar}" alt="Avatar Picture" class="d-block img-fluid mb-3 p-3">
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="card-title p-3">

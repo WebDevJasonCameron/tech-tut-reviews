@@ -21,9 +21,8 @@
             <thead class="thead-dark">
               <tr>
                 <th>Thumb</th>
-                <th>Title</th>
                 <th>Rating</th>
-                <th>Review</th>
+                <th>Title / Review</th>
                 <th>Link</th>
                 <th>More</th>
               </tr>
@@ -33,9 +32,21 @@
                 <td>
                   <img th:src="${review.thumb}" alt="alt pix" style="width: 100%">
                 </td>
-                <td th:text="${review.title}">Review Title</td>
                 <td th:text="${review.rating}" class="rating">Review Title</td>
-                <td th:text="${stringService.reduceLength(review.reviewComments, 200)}">Review Title</td>
+                <td>
+                  <div class="row">
+                    <div class="col-12">
+                      <span th:text="${review.title}">Review Title</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <span th:text="${stringService.reduceLength(review.reviewComments, 200)}">
+                        Review Title
+                      </span>
+                    </div>
+                  </div>
+                </td>
                 <td><a class="btn btn-primary" th:href="${review.url}">Link</a></td>
                 <td>
                   <form th:action="@{/reviews/single}" th:method="post">
