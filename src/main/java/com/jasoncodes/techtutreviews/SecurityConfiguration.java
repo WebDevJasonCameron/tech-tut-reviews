@@ -54,9 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers(
                         "/reviews/create", // only authenticated users can create reviews
                         "/reviews/edit", // only authenticated users can edit reviews
-                            "/reviews/single"
+                            "/reviews/single",
+                            "/user/visit-profile"
                 )
-                .authenticated()
-        ;
+                .authenticated();
+
+                http.csrf().disable();          // Cross Site Request forge
     }
 }
